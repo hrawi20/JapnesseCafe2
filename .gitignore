@@ -1,0 +1,13 @@
+.vs/
+.idea/
+bin/
+obj/
+*.user
+*.suo
+*.csproj.user
+
+[Bb]in/
+[Oo]bj/
+
+packages/
+*.nupkg

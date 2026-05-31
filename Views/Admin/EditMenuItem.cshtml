@@ -1,0 +1,9 @@
+@model JapnesseCafe.Models.MenuItem
+@{
+    ViewBag.Title = "Edit Menu Item";
+}
+
+<div class="container py-5">
+    <h1>Edit Menu Item</h1>
+    @Html.Partial("_MenuItemForm", Model, new ViewDataDictionary { { "Action", "EditMenuItem" } })
+</div>

@@ -1,0 +1,54 @@
+@{
+    ViewBag.Title = "Home";
+}
+
+<section class="hero-section">
+    <div class="container hero-content">
+        <div class="hero-copy">
+            <span class="kicker">Tokyo pastel cafe and anime goods</span>
+            <h1>Sakura Anime Cafe</h1>
+            <p>Enjoy matcha drinks, cozy Japanese comfort food, sweet desserts, and a cute anime merchandise corner in one demo storefront.</p>
+            <div class="d-flex flex-wrap gap-3">
+                @Html.ActionLink("Explore Cafe Menu", "Index", "Menu", null, new { @class = "btn btn-cafe btn-lg" })
+                @Html.ActionLink("Shop Anime Goods", "Index", "Products", null, new { @class = "btn btn-outline-cafe btn-lg" })
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <a href="@Url.Action("Index", "Menu")" class="feature-card menu-card">
+                <span class="feature-icon">&#x1F375;</span>
+                <h2>Cafe Menu</h2>
+                <p>Matcha lattes, sakura tea, taiyaki, ramen bowls, bento boxes, and cozy anime cafe plates.</p>
+                <span class="feature-link">View menu</span>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("Index", "Products")" class="feature-card shop-card">
+                <span class="feature-icon">&#x1F380;</span>
+                <h2>Anime Shop</h2>
+                <p>Figures, t-shirts, pins, keychains, tote bags, and cute accessories for your collection.</p>
+                <span class="feature-link">Browse shop</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="pattern-band">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <h2>Soft sakura vibes, simple demo features</h2>
+                <p class="lead mb-0">This MVC 5 demo stores menu and product images in SQL Server, serves them through controller actions, and uses Session for a combined cafe and merchandise cart.</p>
+            </div>
+            <div class="col-lg-5">
+                <div class="stamp-grid">
+                    <span>桜</span><span>喫茶</span><span>アニメ</span><span>お茶</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

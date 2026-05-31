@@ -1,0 +1,45 @@
+@model IEnumerable<JapnesseCafe.Models.MenuItem>
+@{
+    ViewBag.Title = "Manage Menu Items";
+}
+
+<div class="container py-5">
+    <div class="admin-heading">
+        <div>
+            <span class="kicker">Admin</span>
+            <h1>Menu Items</h1>
+        </div>
+        @Html.ActionLink("Add menu item", "CreateMenuItem", null, new { @class = "btn btn-cafe" })
+    </div>
+
+    <div class="table-responsive admin-panel">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@item.Name</td>
+                        <td>@item.Category</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td>@(item.IsAvailable ? "Yes" : "No")</td>
+                        <td>@(item.ImageData != null ? "Stored in DB" : "None")</td>
+                        <td class="text-end">
+                            @Html.ActionLink("Edit", "EditMenuItem", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-primary me-2" })
+                            @Html.ActionLink("Delete", "DeleteMenuItem", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

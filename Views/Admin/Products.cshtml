@@ -1,0 +1,45 @@
+@model IEnumerable<JapnesseCafe.Models.Product>
+@{
+    ViewBag.Title = "Manage Products";
+}
+
+<div class="container py-5">
+    <div class="admin-heading">
+        <div>
+            <span class="kicker">Admin</span>
+            <h1>Products</h1>
+        </div>
+        @Html.ActionLink("Add product", "CreateProduct", null, new { @class = "btn btn-cafe" })
+    </div>
+
+    <div class="table-responsive admin-panel">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@product.Name</td>
+                        <td>@product.Category</td>
+                        <td>@product.Price.ToString("C")</td>
+                        <td>@(product.IsAvailable ? "Yes" : "No")</td>
+                        <td>@(product.ImageData != null ? "Stored in DB" : "None")</td>
+                        <td class="text-end">
+                            @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }, new { @class = "btn btn-sm btn-outline-primary me-2" })
+                            @Html.ActionLink("Delete", "DeleteProduct", new { id = product.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

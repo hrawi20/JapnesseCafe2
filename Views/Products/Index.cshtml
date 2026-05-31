@@ -1,0 +1,63 @@
+@model IEnumerable<JapnesseCafe.Models.Product>
+@{
+    ViewBag.Title = "Anime Shop";
+    var groups = Model.GroupBy(x => x.Category).OrderBy(x => x.Key);
+}
+
+<section class="page-header shop-header">
+    <div class="container">
+        <span class="kicker">Anime Shop</span>
+        <h1>Figures, fashion, and cute extras</h1>
+        <p>Demo merchandise grouped by category and ready for the same cart as cafe orders.</p>
+    </div>
+</section>
+
+<div class="container py-4">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success soft-alert">@TempData["Message"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">No products are available yet.</div>
+    }
+
+    @foreach (var group in groups)
+    {
+        <section class="category-section">
+            <h2>@group.Key</h2>
+            <div class="row g-4">
+                @foreach (var product in group)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="anime-card h-100">
+                            @if (product.ImageData != null && product.ImageData.Length > 0)
+                            {
+                                <img class="card-img-top item-image" src="@Url.Action("Image", "Products", new { id = product.Id })" alt="@product.Name" />
+                            }
+                            else
+                            {
+                                <div class="image-placeholder">アニメ</div>
+                            }
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between gap-2 align-items-start">
+                                    <h3>@product.Name</h3>
+                                    <span class="price">@product.Price.ToString("C")</span>
+                                </div>
+                                <span class="badge category-badge">@product.Category</span>
+                                <p>@product.Description</p>
+                                @using (Html.BeginForm("AddProduct", "Cart", FormMethod.Post, new { @class = "mt-auto" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("id", product.Id)
+                                    <button class="btn btn-cafe w-100" type="submit">Add to cart</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+</div>

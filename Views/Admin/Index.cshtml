@@ -1,0 +1,30 @@
+@{
+    ViewBag.Title = "Admin";
+}
+
+<section class="page-header admin-header">
+    <div class="container">
+        <span class="kicker">Admin</span>
+        <h1>Demo management</h1>
+        <p>No login is required for this demo admin area.</p>
+    </div>
+</section>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="admin-tile">
+                <h2>Menu Items</h2>
+                <p>@ViewBag.MenuCount items in the cafe menu.</p>
+                @Html.ActionLink("Manage menu", "MenuItems", null, new { @class = "btn btn-cafe" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="admin-tile">
+                <h2>Products</h2>
+                <p>@ViewBag.ProductCount products in the anime shop.</p>
+                @Html.ActionLink("Manage products", "Products", null, new { @class = "btn btn-cafe" })
+            </div>
+        </div>
+    </div>
+</div>

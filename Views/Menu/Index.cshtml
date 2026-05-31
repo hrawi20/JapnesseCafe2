@@ -1,0 +1,63 @@
+@model IEnumerable<JapnesseCafe.Models.MenuItem>
+@{
+    ViewBag.Title = "Cafe Menu";
+    var groups = Model.GroupBy(x => x.Category).OrderBy(x => x.Key);
+}
+
+<section class="page-header">
+    <div class="container">
+        <span class="kicker">Cafe Menu</span>
+        <h1>Japanese cafe favorites</h1>
+        <p>Drinks, desserts, snacks, and warm meals for your anime cafe visit.</p>
+    </div>
+</section>
+
+<div class="container py-4">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success soft-alert">@TempData["Message"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">No menu items are available yet.</div>
+    }
+
+    @foreach (var group in groups)
+    {
+        <section class="category-section">
+            <h2>@group.Key</h2>
+            <div class="row g-4">
+                @foreach (var item in group)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="anime-card h-100">
+                            @if (item.ImageData != null && item.ImageData.Length > 0)
+                            {
+                                <img class="card-img-top item-image" src="@Url.Action("Image", "Menu", new { id = item.Id })" alt="@item.Name" />
+                            }
+                            else
+                            {
+                                <div class="image-placeholder">桜</div>
+                            }
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between gap-2 align-items-start">
+                                    <h3>@item.Name</h3>
+                                    <span class="price">@item.Price.ToString("C")</span>
+                                </div>
+                                <span class="badge category-badge">@item.Category</span>
+                                <p>@item.Description</p>
+                                @using (Html.BeginForm("AddMenuItem", "Cart", FormMethod.Post, new { @class = "mt-auto" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("id", item.Id)
+                                    <button class="btn btn-cafe w-100" type="submit">Add to cart</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+</div>

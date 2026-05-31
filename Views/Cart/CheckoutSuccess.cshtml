@@ -1,0 +1,12 @@
+@{
+    ViewBag.Title = "Checkout Success";
+}
+
+<section class="page-header">
+    <div class="container">
+        <span class="kicker">Order Placed</span>
+        <h1>Arigato for your demo order</h1>
+        <p>Your fake checkout is complete. No payment was processed.</p>
+        @Html.ActionLink("Back to Home", "Index", "Home", null, new { @class = "btn btn-cafe mt-3" })
+    </div>
+</section>

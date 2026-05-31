@@ -1,0 +1,18 @@
+@model JapnesseCafe.Models.MenuItem
+@{
+    ViewBag.Title = "Delete Menu Item";
+}
+
+<div class="container py-5">
+    <div class="admin-panel">
+        <h1>Delete @Model.Name?</h1>
+        <p>This will remove the menu item and its database-stored image.</p>
+        @using (Html.BeginForm("DeleteMenuItem", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <button class="btn btn-danger" type="submit">Delete</button>
+            @Html.ActionLink("Cancel", "MenuItems", null, new { @class = "btn btn-outline-secondary ms-2" })
+        }
+    </div>
+</div>

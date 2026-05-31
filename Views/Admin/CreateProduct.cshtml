@@ -1,0 +1,9 @@
+@model JapnesseCafe.Models.Product
+@{
+    ViewBag.Title = "Create Product";
+}
+
+<div class="container py-5">
+    <h1>Create Product</h1>
+    @Html.Partial("_ProductForm", Model, new ViewDataDictionary { { "Action", "CreateProduct" } })
+</div>
